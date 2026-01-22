@@ -4,25 +4,30 @@ import NewTODOForm from "./newToDoForm"
 import {todos as todosAtom} from "./atom";
 import { useRecoilValue } from "recoil";
 
-export default function ToDoList({onCreateToDo}) {
-    const todos = useSelector((state) => state.todos.value);
-    // const todos = useRecoilValue(todosAtom);
+import { observer } from "mobx-react-lite";
+import TodosStore from "./todos-mobx.jsx";
+
+const TodoList= observer (( ) => {
+    // const todos = useSelector((state) => state.todos.value);
     return (
         <div>
             <h1>To-Do List</h1>
             <NewTODOForm/>
             <h3>Complete List:</h3>
             {
-                todos.filter(todo => todo.isCompleted).map((todo, index) => (
-                    <ToDoListItems key={index} todo={todo}  />
+                TodosStore.todos.filter(todo => todo.isCompleted).map((todo, index) => (
+                    <ToDoListItems key={index} todo={todo} index={TodosStore.todos.indexOf(todo)} />
                 ))
             }
             <h3>Incomplete List:</h3>
             {
-                todos.filter(todo => !todo.isCompleted).map((todo, index) => (
-                    <ToDoListItems key={index} todo={todo} />
+                TodosStore.todos.filter(todo => !todo.isCompleted).map((todo, index) => (
+                    <ToDoListItems key={index} todo={todo} index={TodosStore.todos.indexOf(todo)} />
                 ))
             }
         </div>
-    )
+    
+)
 }
+)
+export default TodoList;

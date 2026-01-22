@@ -7,3 +7,5 @@ State Management:
     - redux
     -recoil
         -npm install recoil
+    - mobx
+        -npm install mobx mobx-react-lite
