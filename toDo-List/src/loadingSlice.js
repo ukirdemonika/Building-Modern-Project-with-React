@@ -26,4 +26,5 @@ loadingFailed: (state)=>{
 
     }
 });
+export const { loadingStarted, loadingCompleted, loadingFailed } = loadingSlice.actions;
 export default loadingSlice.reducer;

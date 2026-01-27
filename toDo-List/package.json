@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
+    "axios": "^1.13.3",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "mobx": "^6.15.0",
     "mobx-react-lite": "^4.1.1",

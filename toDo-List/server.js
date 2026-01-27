@@ -1,34 +1,39 @@
 import express from 'express';
+import cors from 'cors';
 
 const app = express();
- const port = 3000;
+const port = 3000;
 
- let todos = [];
+let todos = [
+  { id : `´${Date.now()}`,
+       text : 'Sample Todo',
+       isCompleted : false}
+];
 
- app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
- app.get('/todos',(rreq, res)=>{
-    res.json();
+ app.get('/api/todos',(rreq, res)=>{
+    res.json(todos);
  })
 
- app.post('/todos',(req, res)=>{
-
+ app.post('/api/todos',(req, res)=>{
     const newTodo ={
-        id : '123',
-        text : 'Sample Todo',
+        id : `´${Date.now()}`,
+        text : req.body.text,
         isCompleted : false
     };
     todos.push(newTodo);
     res.status(201).json(newTodo);
     })
 
-app.delete('/todos/:id',(req, res)=>{
+app.delete('/api/todos/:id',(req, res)=>{
     const todoId = parseInt(req.params.id);
     todos = todos.filter(todo => todo.id !== todoId);
     res.status(204).send();
 })
 
-app.put('/todos/:id',(req, res)=>{
+app.put('/api/todos/:id',(req, res)=>{
     const todoId=parseInt(req.params.id);
     const updatedTodo = req.body;
 
