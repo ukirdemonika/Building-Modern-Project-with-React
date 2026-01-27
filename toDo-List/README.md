@@ -9,3 +9,6 @@ State Management:
         -npm install recoil
     - mobx
         -npm install mobx mobx-react-lite
+
+Handling SideEffects - Redux Thunk
+
