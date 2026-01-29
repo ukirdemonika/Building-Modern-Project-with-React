@@ -6,10 +6,12 @@ import './index.css'
 import App from './App.jsx'
 import todoSlices from './todoSlices.jsx'
 import TodosStore from './todos-mobx.jsx'
+import loadingSlice from './loadingSlice.js'
 
 const store = configureStore({
   reducer:{
     todos:todoSlices,
+    loading : loadingSlice
   }
 })
 
