@@ -17,14 +17,14 @@ const TodoList = observer(() => {
                     <>
                         <h3>Complete List:</h3>
                         {
-                            todos.map((todo, index) => (
-                                <ToDoListItems key={index} todo={todo} />
+                            todos.map((todo) => (
+                                <ToDoListItems key={todo.id} todo={todo} />
                             ))
                         }
                         <h3>Incomplete List:</h3>
                         {
-                            todos.map((todo, index) => (
-                                <ToDoListItems key={index} todo={todo}  />
+                            todos.map((todo) => (
+                                <ToDoListItems key={todo.id} todo={todo}  />
                             ))
                         }
                     </>
