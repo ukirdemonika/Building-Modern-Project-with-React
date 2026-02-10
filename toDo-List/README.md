@@ -18,3 +18,6 @@ Notes:
     4. Styale compoennt is used to separate the styale and styale login from our components.
        1. npm install styled-components
 
+Testing:
+1. run the test:
+2.  node todoSlices.jsx
