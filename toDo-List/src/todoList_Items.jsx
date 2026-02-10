@@ -4,9 +4,17 @@ import { deleteTodos, markTodoAsCompleted } from "./thunk";
 import styled from "styled-components"
 
 
+const completedSTyleAcctoCondition =({$completedstyle})=>{
+
+    if($completedstyle){
+        return `background-color: lightgreen;`
+    }else{
+        return `background-color: #f9f9f9;`
+    }
+}
 const CartContainer = styled.div`
 
-${props => props.$completedstyle ? `background-color: lightgreen;` : `background-color: #f9f9f9;`}
+${completedSTyleAcctoCondition}
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     padding: 20px;
