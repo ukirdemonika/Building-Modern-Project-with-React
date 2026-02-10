@@ -35,8 +35,11 @@ export const createTodos = (newTodosText) => async (dispatch, getState) => {
 
 export const deleteTodos = (todoId)=> async (dispatch, getState)=>{
     try{
+        console.log('deleteTodos called with id:', todoId);
         await axios.delete('http://localhost:3000/api/todos/' + todoId);
-        const updatedList= getState().todos.value.filter(t =>t.id !== todoId)
+        const current = getState().todos.value || [];
+        const updatedList= current.filter(t => t.id !== todoId);
+        console.log('deleteTodos updatedList length:', updatedList.length, 'current length:', current.length);
         dispatch(updatedTodos(updatedList));
     }catch(e){
         console.log(e);
@@ -44,11 +47,12 @@ export const deleteTodos = (todoId)=> async (dispatch, getState)=>{
 }
 export const markTodoAsCompleted = (todoId) => async (dispatch, getState)=>{
     try{
+        console.log('markTodoAsCompleted called with id:', todoId);
         const response=await axios.put('http://localhost:3000/api/todos/' + todoId, {isCompleted: true});
         const updatedTodo = response.data;
-        const updatedList = getState().todos.value.map(
-            t => t.id == todoId ? updatedTodo : t
-        );
+        const current = getState().todos.value || [];
+        const updatedList = current.map(t => (t.id == todoId ? updatedTodo : t));
+        console.log('markTodoAsCompleted updatedList length:', updatedList.length);
         dispatch(updatedTodos(updatedList));
     }catch(e){
         console.log(e);

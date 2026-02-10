@@ -6,11 +6,11 @@ import { observer } from "mobx-react-lite"
 
 /* observer is a higher-order component that allows us to create reactive components that automatically re-render when the observable data they depend on changes.
 It is used in conjunction with MobX to create components that can react to changes in the state of the application without needing to manually manage subscriptions or updates. */
-const TodoList = observer(() => {
+const TodoList = ()=> {
     const todos = useSelector(getTodosList);
     const todosLoading = useSelector(getLoadingTodosStatus);
-    const completedTodos = useSelector(getCompletedTodos)
-    const incompleteTodos = useSelector(getIncompleteTodos)
+    const completedTodos = useSelector(getCompletedTodos);
+    const incompleteTodos = useSelector(getIncompleteTodos);
     return  (
         <div>
             <h1>To-Do List</h1>
@@ -37,5 +37,5 @@ const TodoList = observer(() => {
 
     )
 }
-)
+
 export default TodoList;
