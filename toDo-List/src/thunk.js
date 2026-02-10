@@ -3,8 +3,7 @@
 
 import axios from 'axios';
 import { loadingStarted, loadingCompleted, loadingFailed } from './loadingSlice';
-import { get } from 'mobx';
-import { updatedTodos,deleteTodo } from './todoSlices';
+import { updatedTodos } from './todoSlices';
 export const loadTodos = () => async (dispatch) => {
     dispatch(loadingStarted());
     try {
@@ -46,10 +45,10 @@ export const deleteTodos = (todoId)=> async (dispatch, getState)=>{
 export const markTodoAsCompleted = (todoId) => async (dispatch, getState)=>{
     try{
         const response=await axios.put('http://localhost:3000/api/todos/' + todoId, {isCompleted: true});
-        const updatedTodos =response.data;
-        const updatedList =getState().todos.value.map(
-            t => t.id == todoId ? updatedTodos   : t
-        )
+        const updatedTodo = response.data;
+        const updatedList = getState().todos.value.map(
+            t => t.id == todoId ? updatedTodo : t
+        );
         dispatch(updatedTodos(updatedList));
     }catch(e){
         console.log(e);

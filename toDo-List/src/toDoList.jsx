@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import ToDoListItems from "./todoList_Items"
 import NewTODOForm from "./newToDoForm"
-import { getTodosList, getLoadingTodosStatus } from "./selectors"
+import { getTodosList, getLoadingTodosStatus, getCompletedTodos, getIncompleteTodos  } from "./selectors"
 import { observer } from "mobx-react-lite"
 
 /* observer is a higher-order component that allows us to create reactive components that automatically re-render when the observable data they depend on changes.
@@ -9,7 +9,9 @@ It is used in conjunction with MobX to create components that can react to chang
 const TodoList = observer(() => {
     const todos = useSelector(getTodosList);
     const todosLoading = useSelector(getLoadingTodosStatus);
-    return (
+    const completedTodos = useSelector(getCompletedTodos)
+    const incompleteTodos = useSelector(getIncompleteTodos)
+    return  (
         <div>
             <h1>To-Do List</h1>
             <NewTODOForm />
@@ -18,13 +20,13 @@ const TodoList = observer(() => {
                     <>
                         <h3>Complete List:</h3>
                         {
-                            todos.map((todo) => (
+                            completedTodos.map((todo) => (
                                 <ToDoListItems key={todo.id} todo={todo} />
                             ))
                         }
                         <h3>Incomplete List:</h3>
                         {
-                            todos.map((todo) => (
+                            incompleteTodos.map((todo) => (
                                 <ToDoListItems key={todo.id} todo={todo} />
                             ))
                         }
