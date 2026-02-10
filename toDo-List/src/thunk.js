@@ -1,4 +1,5 @@
 //Handling side effects and calling api from backend to fetch data
+//Thunk is a middleware that allows us to write action creators that return a function instead of an action. This function can be used to perform asynchronous operations, such as fetching data from an API, and then dispatching actions based on the results of those operations.
 
 import axios from 'axios';
 import { loadingStarted, loadingCompleted, loadingFailed } from './loadingSlice';
@@ -37,6 +38,18 @@ export const deleteTodos = (todoId)=> async (dispatch, getState)=>{
     try{
         await axios.delete('http://localhost:3000/api/todos/' + todoId);
         const updatedList= getState().todos.value.filter(t =>t.id !== todoId)
+        dispatch(updatedTodos(updatedList));
+    }catch(e){
+        console.log(e);
+    }
+}
+export const markTodoAsCompleted = (todoId) => async (dispatch, getState)=>{
+    try{
+        const response=await axios.put('http://localhost:3000/api/todos/' + todoId, {isCompleted: true});
+        const updatedTodos =response.data;
+        const updatedList =getState().todos.value.map(
+            t => t.id == todoId ? updatedTodos   : t
+        )
         dispatch(updatedTodos(updatedList));
     }catch(e){
         console.log(e);

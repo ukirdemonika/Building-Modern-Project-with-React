@@ -12,7 +12,7 @@ const ToDoListItems = observer(({ todo}) => {
             {todo.isCompleted && <p>Completed!</p>}
             {todo.isCompleted
                 ? <button onClick={() => dispatch(deleteTodo(todo.id))}>delete Item</button>
-                : <button onClick={() => dispatch(markTodoAsCompleted(todo.text))}>Mark as completed</button>}
+                : <button onClick={() => dispatch(markTodoAsCompleted(todo.id))}>Mark as completed</button>}
         </>
     );
 });
